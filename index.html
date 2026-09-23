@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<svg class="inline-svg" style="display: none;">
+  <symbol id="check-4" viewbox="0 0 12 10">
+    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+  </symbol>
+</svg>
+
+  <div class="menuContainer">
+      <button id="btnMenu" class="btnTop btn sem-hover">☰</button>
+      <h1 id="menuAtual"></h1>
+      <button id="btnConfig" class="btnTop btn sem-hover">⚙︎</button>
+  </div>
+
+  <h1 id="Titulo"></h1>
+    
+   <div id="modalLista" class="modal"> 
+        <div class="modalConteudo">
+          <input id="inputModal">
+            <div class="btnModalCont">
+                <button class="btnModal" onclick="confirmarModal()">Criar</button>
+                <button class="btnModal" onclick="fecharModal(event)">Cancelar</button>
+            </div>
+        </div>
+  </div>
+
+  <div id="modalLimpar" class="modal"> 
+        <div class="modalConteudo">
+          <h2 id="limparLista">Você está prestes a apagar todos itens selecionados.</h2>
+            <div class="btnModalCont">
+                <button class="btnModal" onclick="confirmarAcao(event)">Prosseguir</button>
+                <button class="btnModal" onclick="fecharModal(event)">Cancelar</button>
+            </div>
+        </div>
+  </div>
+    
+
+  <div id="modalCancelar" class="modal"> 
+        <div class="modalConteudo">
+          <h2 id="cancelarEdicao">Deseja cancelar as mudanças?</h2>
+            <div class="btnModalCont">
+                <button class="btnModal" onclick="cancel()">Sim</button>
+                <button class="btnModal" onclick="fecharModal()">Não</button>
+            </div>
+        </div>
+  </div>
+
+  <div id="menuGaveta" class="menuGaveta">
+     <div class="gavetaContainer">
+        <button class="btnGaveta btn" onclick="mostrarListas()">
+          <i class="fa-solid fa-list"></i> Minhas listas</button>
+        <button class="btnGaveta btn" onclick="criarLista()">
+          <i class="fa-solid fa-plus"></i> Nova lista</button>
+        <button class="btnGaveta btn" onclick="mostrarTemas()">
+          <i class="fa-solid fa-brush"></i> Temas</button>
+        <button class="btnGaveta btn btnConta" style="text-decoration: line-through;">
+          <i class="fa-solid fa-circle-user"></i> Minha conta</button>
+      </div>
+  </div>
+
+  <div id="containerTemas" class="containerTemas">
+    <div class="cardTema" onclick="mudarTema('claro')">
+        <div class="previewTema claro"></div>
+        <h3>Claro</h3>
+    </div>
+
+    <div class="cardTema" onclick="mudarTema('escuro')">
+        <div class="previewTema escuro"></div>
+        <h3>Escuro</h3>
+    </div>
+
+       <div class="cardTema" onclick="mudarTema('matcha')">
+        <div class="previewTema matcha"></div>
+        <h3>Matcha</h3>
+     </div>
+  </div>
+
+  <div  class="container" id="mainDiv"></div>
+
+  <div class="containerListas" id="containerListas"></div>
+
+  <div class="btnContainer">
+        <button class="btn btnItem" id="btnLista" onclick="criarLista()" style="display: none;">Nova lista</button>
+        <button class="btn btnEdicao" id="btnItem" onclick="novoItem()">Adicionar item</button>
+        <button class="btn btnOrder" id="btnOrder" onclick="order()">Editar</button>
+        <button class="btn btnChecked" id="btnChecked" onclick="rmvChecked()">Limpar</button>
+        <button class="btn btnEdicao" id="btnCancel" onclick="modalCancelar()">Cancelar</button>
+  </div>
+
+<script src="app.js" defer ></script>
+</body>
+</html>

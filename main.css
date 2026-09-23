@@ -1,0 +1,743 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* =========================
+   RESET / CONFIGURAÇÕES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Cabin", sans-serif;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+:root {
+    --bege: #f5f5f5; /*Fundo*/
+    --verde: #222222; /*Texto principal*/
+    --lima: #555555; /*Texto Secundario*/
+    --marrom: #ffffff; /*Cartões/gaveta/Header*/
+    --laranja: #dddddd; /*Bordas/detalhes*/
+}
+
+.temaMatcha {
+    --bege: #f2ded0;
+    --verde: #bdbf65;
+    --lima: #bfbb7e;
+    --marrom: #73655d;
+    --laranja: #d99b77;
+}
+
+.temaEscuro {
+    --bege: #121212;
+    --verde: #f5f5f5;
+    --lima: #aaaaaa;
+    --marrom: #1e1e1e;
+    --laranja: #333333;
+}
+
+/* =========================
+   ELEMENTOS GERAIS
+========================= */
+
+body {
+    background-color: var(--bege);
+    overflow-x: hidden;
+}
+
+body.arrastando-ativo,
+body.arrastando-ativo * {
+    cursor: grabbing !important;
+}
+
+h1 {
+    color: var(--lima);
+    font-size: 62px;
+    margin: 0px 0px 6px 12px;
+}
+
+h2 {
+    color: var(--verde);
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+h3 {
+    padding: 9px;
+    color: var(--verde);
+}
+
+button {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:not(.sem-hover):not(.btnCard):hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   TEXTO
+========================= */
+
+.menuContainer h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    background-color: transparent;
+    color: var(--verde);
+    margin: 0;
+    text-align: center;
+}
+
+.lista p {
+    flex: 1;
+    margin: 0;
+    text-align: left;
+    color: var(--verde);
+}
+
+.cardLista h3 {
+    padding: 0 48px 3px 0;
+    font-size: 26px;
+}
+
+.cardLista p {
+    font-size: 22px;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+    height: 39px;
+    background-color: var(--bege);
+    color: var(--lima);
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.inputLista {
+    font: inherit;
+    padding: 0 11px;
+    outline: none;
+    border: solid var(--laranja) 2px;
+    text-align: left;
+    width: 40%;
+    height: 35px;
+}
+
+#inputTitulo {
+    font-size: 56px;
+    text-align: left;
+    padding-left: 16px;
+    border: solid var(--laranja) 2px;
+    height: auto;
+    background-color: var(--bege);
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+.btn,
+.btnModal {
+    background-color: var(--marrom);
+    color: var(--lima);
+    border: none;
+    padding: 11px 17px;
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.btnCard {
+    width: 100%;
+    padding: 8px 11px;
+    font-size: 20px;
+    text-align: left;
+    border-radius: 5px;
+    transition: filter 0.2s ease;
+}
+
+.btnCard:hover {
+    filter: brightness(1.15);
+}
+
+.btnEditor {
+    border: none;
+    background: none;
+    color: var(--verde);
+    padding: 6px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnEditor svg {
+    width: 1.4em;
+    height: 1.4em;
+    stroke: var(--verde);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    vertical-align: middle;
+}
+
+.btnLista {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    background: none;
+}
+
+.btnFixar {
+    color: var(--verde);
+    border: none;
+    top: 0px;
+    right: 24px;
+    position: absolute;
+    background: transparent;
+    padding: 6px;
+    display: flex;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.cardEditor {
+    color: var(--verde);
+    background: var(--marrom);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+.cardEditor:hover {
+    filter: brightness(1.15);
+}
+
+.btnReorder {
+    cursor: grab;
+}
+
+.btnReorder.dragging {
+    cursor: grabbing;
+}
+
+#btnMenu,
+#btnConfig {
+    position: static;
+    z-index: 1001;
+}
+
+#btnMenu {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: none;
+    padding: 8px 12px;
+    white-space: nowrap;
+}
+#btnMenu i {
+    font-size: 25px;
+    position: relative;
+    top: 2px;
+}
+#btnConfig {
+    justify-self: end;
+}
+
+.btnEdicao {
+    gap: 9px;
+    align-items: center;
+}
+
+.btnGaveta{
+    width: 100%;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 28px;
+    text-align: left;
+}
+.btnGaveta i{
+    width: 22px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.btnConta{
+    margin-top: auto;
+}
+
+
+.btnGaveta:hover {
+    background-color: rgba(242, 222, 208, 0.12);
+    transform: translateX(4px);
+}
+
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.checkboxEstilo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 2px;
+}
+
+.checkboxEstilo input[type='checkbox'] {
+    --active: var(--verde);
+    --active-inner: var(--marrom);
+    --focus: 2px rgba(189, 191, 101, 0.4);
+    --border: var(--laranja);
+    --border-hover: var(--lima);
+    --background: var(--bege);
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+    border: 2px solid var(--bc, var(--border));
+    background: var(--b, var(--background));
+    border-radius: 6px;
+    transition: background 0.3s, border-color 0.3s; 
+}
+
+.checkboxEstilo input[type='checkbox']::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 10px;
+    border: 2px solid var(--active-inner);
+    border-top: 0;
+    border-left: 0;
+    opacity: var(--o, 0);
+    transform: rotate(var(--r, 20deg));
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+}
+
+.checkboxEstilo input[type='checkbox']:checked {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: 0.3s;
+    --d-t: 0.6s;
+    --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+    --o: 1;
+    --r: 43deg;
+}
+
+.checkboxEstilo input[type='checkbox']:hover:not(:checked) {
+    --bc: var(--border-hover);
+}
+
+.checkboxEstilo input[type='checkbox']:focus {
+    box-shadow: 0 0 0 var(--focus);
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================
+   CONTAINER / LISTAS
+========================= */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 16px 12px 0 12px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+
+.btnContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;            
+    margin: 16px auto 0 auto;
+    padding: 0 12px;              
+    box-sizing: border-box;      
+}
+@media (min-width: 1200px) {
+    .btnContainer {
+        max-width: 1100px;
+    }
+}
+
+.containerListas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    padding: 18px;
+}
+
+.containerTemas{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 16px;
+}
+#containerTemas{
+    display: none;
+}
+
+.cardTema{
+    background: var(--marrom);
+    border: 3px solid var(--laranja);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+}
+.cardTema:hover{
+ transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.previewTema{
+    height: 130px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    border: solid 2px var(--laranja);
+}
+
+.containerListas:empty {
+    padding: 0;
+}
+
+.cardLista {
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    min-height: 160px;
+    cursor: pointer;
+    border: 2px solid var(--laranja);
+    background-color: var(--marrom);
+    position: relative;
+    color: var(--verde);
+}
+.cardLista:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.menuCard {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 115px;
+    padding: 3px;
+    background-color: var(--marrom);
+    border: 2px solid var(--laranja);
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.areaMenu {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.menuContainer {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    align-items: center;
+    min-height: 60px;
+    height: 80px;
+    width: 100%;
+    background-color: var(--marrom);
+    padding: 0 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--laranja);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.btnTop {
+    background: none;
+    border: none;
+    padding: 8px;
+    font-size: 32px;
+}
+
+.menuGaveta {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: 280px;
+    height: 100vh;
+    background: var(--marrom);
+    padding: 90px 20px 25px;
+    z-index: 1000;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.18);
+    transition: transform 0.3s ease-in-out;
+}
+.menuGaveta.aberto {
+    transform: translateX(0);
+}
+
+.gavetaContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+}
+
+.gavetaContainer h2 {
+    padding: 0 10px 12px;
+    border-bottom: 2px solid var(--laranja);
+    margin-bottom: 8px;
+}
+
+.lista {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 70px;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--marrom);
+    border: 2px solid var(--laranja);
+    border-radius: 10px;
+    color: var(--bege);
+    font-size: 28px;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+.lista:hover {
+    transform: translateX(4px);
+}
+
+.erroAviso {
+    text-align: center;
+    padding: 2.2rem;
+}
+
+.tituloLista{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 70px;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--marrom);
+    border: 2px solid var(--laranja);
+    border-radius: 10px;
+    color: var(--bege);
+    font-size: 28px;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+.tituloLista:hover {
+    transform: translateX(4px);
+}
+
+
+/* =========================
+   MODO ORGANIZAÇÃO
+========================= */
+
+.btnEditor,
+.btnEdicao,
+.btnOrder,
+.btnChecked {
+    display: none;
+}
+
+body.organizando .btnEditor,
+body.organizando .listaCont,
+body.organizando .btnEdicao {
+    display: flex;
+}
+
+body.organizando #btnLista,
+body.organizando .btnItem,
+body.organizando .checkbox {
+    display: none;
+}
+
+body.organizando .listaCont {
+    text-decoration: none !important;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modalConteudo {
+    width: fit-content;
+    min-width: 280px;
+    max-width: 550px;
+    padding: 20px 24px;
+    background-color: var(--marrom);
+    border-radius: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+.modalConteudo h2{
+    text-align: left;
+    font-size: 22px;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+#inputModal{
+    color: var(--lima);
+    font-size: 22px;
+    border: 2px solid var(--laranja);
+}
+
+.btnModalCont {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    width: 100%;
+}
+
+.btnModal{
+    font-size: 20px;
+}
+
+/* =========================
+   TEMAS
+========================= */
+
+body.temaEscuro{
+    --bege: #121212;
+    --verde: #f5f5f5;
+    --lima: #aaaaaa;
+    --marrom: #1e1e1e;
+    --laranja: #333333;
+}
+
+body.temaMatcha{
+    --bege: #f2ded0;
+    --verde: #bdbf65;
+    --lima: #bfbb7e;
+    --marrom: #73655d;
+    --laranja: #d99b77;
+}
+
+
+.previewTema.matcha{
+    background: linear-gradient(
+        90deg,
+        #f2ded0 0%,
+        #f2ded0 33%,
+        #73655d 33%,
+        #73655d 66%,
+        #bdbf65 66%,
+        #bdbf65 100%
+    );
+}
+
+.previewTema.claro{
+    background: linear-gradient(
+        90deg,
+        #f5f5f5 0%,
+        #f5f5f5 33%,
+        #ffffff 33%,
+        #ffffff 66%,
+        #dddddd 66%
+    );
+}
+
+.previewTema.escuro{
+    background: linear-gradient(
+        90deg,
+        #121212 0%,
+        #121212 33%,
+        #1e1e1e 33%,
+        #1e1e1e 66%,
+        #333333 66%
+    );
+}
+
+/* =========================
+   EFEITOS
+========================= */
+
+.arrastando {
+    opacity: 0.95;
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+#toastAviso{
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px;           
+    background: var(--marrom); 
+    color: var(--bege);           
+    padding: 12px 20px; 
+    border-radius: 8px;           
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);         
+    z-index: 9999; 
+    transition: opacity 0.4s ease;
+    font-size: 28px;
+}
+
